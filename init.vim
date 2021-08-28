@@ -62,9 +62,6 @@ Plug 'dansomething/vim-hackernews'
 
 call plug#end()
 
-""" Python3 VirtualEnv
-let g:python3_host_prog = expand('/usr/bin/python')
-
 """ Coloring
 
 "syntax on
