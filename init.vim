@@ -64,6 +64,12 @@ call plug#end()
 
 """ Coloring
 
+" Hack around nixos limitation
+if filereadable(expand("~/bin/venv/python"))
+    let g:python3_host_prog = expand('/usr/bin/venv/python')
+endif
+
+
 "syntax on
 "color Tomorrow-Night-Eighties
 let material_style = 'mariana'
