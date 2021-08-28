@@ -76,7 +76,7 @@ endif
 "syntax on
 "color Tomorrow-Night-Eighties
 let material_style = 'mariana'
-let material_style_fix = 1
+let material_style_fix = v:true
 colorscheme material
 highlight Pmenu guibg=white guifg=black gui=bold
 highlight Comment gui=bold
