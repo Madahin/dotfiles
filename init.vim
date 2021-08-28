@@ -65,8 +65,11 @@ call plug#end()
 """ Coloring
 
 " Hack around nixos limitation
-if filereadable(expand("~/bin/venv/python"))
-    let g:python3_host_prog = expand('/usr/bin/venv/python')
+if filereadable(expand("~/bin/venv/bin/python3"))
+    let g:python3_host_prog = expand('~/bin/venv/bin/python3')
+endif
+if filereadable(expand("~/bin/venv2/bin/python2"))
+    let g:python_host_prog = expand('~/bin/venv2/bin/python2')
 endif
 
 
