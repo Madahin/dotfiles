@@ -1,0 +1,24 @@
+configuration {
+	modi: "run,window,ssh";
+	font: "mono 12";
+	show-icons: true;
+	terminal: "kitty";
+	sidebar-mode: true;
+	dpi: 138;
+	threads: 4;
+	timeout {
+		action: "kb-cancel";
+		delay:  0;
+	}
+	filebrowser {
+		directories-first: true;
+		sorting-method:    "name";
+	}
+}
+
+@theme "glue_pro_blue"
+
+element-icon {
+	size:             1.0em ;
+}
+  

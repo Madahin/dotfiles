@@ -80,7 +80,24 @@ function install_kitty()
     return 0
 }
 
-for prog in nvim kitty
+function install_rofi()
+{
+    conf_path="${XDG_DATA_HOME:-$HOME/.config/rofi}/config.rasi"
+    echo ${conf_path}
+
+    if ! check_existing_conf ${conf_path} "rofi"
+    then
+        return 1
+    fi
+
+    ln -s "${PWD}/config.rasi" ${conf_path}
+
+    echo "Installation complete"
+
+    return 0
+}
+
+for prog in nvim kitty rofi
 do
     if prog_exist ${prog}
     then
