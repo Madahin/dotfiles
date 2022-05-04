@@ -268,3 +268,4 @@ highlight Normal gui=none
 highlight NonText guibg=none
 " Opaque Background (Comment out to use terminal's profile)
 set termguicolors
+hi LineNr ctermfg=11 gui=bold guifg=#D8DEE9
