@@ -57,6 +57,9 @@ function install_nvim()
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     fi
 
+    # Necessary for starry to function properly
+    mkdir -p ~/.local/share/nvim/site/pack/packer/opt/starry.nvim
+
     ln -s "${PWD}/init.vim" "${conf_path}"
 
     echo "Installation complete"

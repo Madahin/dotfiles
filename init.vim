@@ -16,7 +16,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
 Plug 'pboettch/vim-cmake-syntax'
-Plug 'ray-x/material_plus.nvim'
+Plug 'ray-x/starry.nvim'
 
 " Aethetics - Additional
 Plug 'nightsense/nemo'
@@ -73,17 +73,6 @@ if filereadable(expand("~/bin/venv2/bin/python2"))
 endif
 
 
-"syntax on
-"color Tomorrow-Night-Eighties
-let material_style = 'mariana'
-let material_style_fix = v:true
-colorscheme material
-highlight Pmenu guibg=white guifg=black gui=bold
-highlight Comment gui=bold
-highlight Normal gui=none
-highlight NonText guibg=none
-" Opaque Background (Comment out to use terminal's profile)
-set termguicolors
 
 " Transparent Background (For i3 and compton)
 "highlight Normal guibg=NONE ctermbg=NONE
@@ -265,3 +254,15 @@ nnoremap <leader>tf :NvimTreeFind<CR>
 
 " vim-clang
 let g:clang_compilation_database = './build'
+
+"syntax on
+"color Tomorrow-Night-Eighties
+let starry_style="mariana"
+let starry_style_fix = v:true
+colorscheme mariana
+highlight Pmenu guibg=white guifg=black gui=bold
+highlight Comment gui=bold
+highlight Normal gui=none
+highlight NonText guibg=none
+" Opaque Background (Comment out to use terminal's profile)
+set termguicolors
