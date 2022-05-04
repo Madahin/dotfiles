@@ -244,15 +244,15 @@ nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 
 " NVimTree
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
-let g:nvim_tree_auto_open = 0
+" let g:filters.custom = [ '.git', 'node_modules', '.cache' ]
+let g:open_on_setup = 0
 let g:nvim_tree_auto_close = 1
 nnoremap <leader>to :NvimTreeToggle<CR>
 nnoremap <leader>tr :NvimTreeRefresh<CR>
 nnoremap <leader>tc :NvimTreeClose<CR>
 nnoremap <leader>tf :NvimTreeFind<CR>
 
-lua require'nvim-tree'.setup {}
+lua require'nvim-tree'.setup { filters = { custom = {'.git', 'node_modules', '.cache'}, }, }
 
 " vim-clang
 let g:clang_compilation_database = './build'
