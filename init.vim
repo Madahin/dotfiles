@@ -247,10 +247,12 @@ nmap <S-Tab> :bprevious<CR>
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
 let g:nvim_tree_auto_open = 0
 let g:nvim_tree_auto_close = 1
-nnoremap <leader>to :NvimTreeOpen<CR>
+nnoremap <leader>to :NvimTreeToggle<CR>
 nnoremap <leader>tr :NvimTreeRefresh<CR>
 nnoremap <leader>tc :NvimTreeClose<CR>
 nnoremap <leader>tf :NvimTreeFind<CR>
+
+lua require'nvim-tree'.setup {}
 
 " vim-clang
 let g:clang_compilation_database = './build'
