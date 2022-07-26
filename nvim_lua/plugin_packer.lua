@@ -59,7 +59,8 @@ return require('packer').startup(function()
   use { 'ms-jpq/coq_nvim', run = ':COQdeps'}
   use { 'ms-jpq/coq.artifacts', run = ':COQsnips compile' }
 
-  -- COQsnips compile
+  -- Activate python virtualenv when necessary
+  use 'jmcantrell/vim-virtualenv'
 
   -- LSP config
   use 'neovim/nvim-lspconfig'

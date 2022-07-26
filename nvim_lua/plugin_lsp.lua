@@ -1,7 +1,7 @@
 local lsp = require'lspconfig'
 local coq = require "coq"
 
-function file_exists(name)
+function File_exists(name)
    local f=io.open(name,"r")
    if f~=nil then io.close(f) return true else return false end
 end
@@ -48,16 +48,17 @@ local opts = {
 }
 require('rust-tools').setup(opts)
 
--- Rust
-lsp.rust_analyzer.setup{}
-lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities{})
+-- Bash
+lsp.bashls.setup{}
+lsp.bashls.setup(coq.lsp_ensure_capabilities{})
+
 
 -- C/C++
-if file_exists("./build/compile_commands.json") then
+if File_exists("./build/compile_commands.json") then
     vim.g.clang_compilation_database = "./build"
-elseif file_exists("./cmake-build-debug/compile_commands.json") then
+elseif File_exists("./cmake-build-debug/compile_commands.json") then
     vim.g.clang_compilation_database = "./cmake-build-debug"
-elseif file_exists("./cmake-build-release/compile_commands.json") then
+elseif File_exists("./cmake-build-release/compile_commands.json") then
     vim.g.clang_compilation_database = "./cmake-build-release"
 else
     vim.g.clang_compilation_database = nil
@@ -69,5 +70,74 @@ lsp.clangd.setup(coq.lsp_ensure_capabilities{})
 -- CMake
 lsp.cmake.setup{}
 lsp.cmake.setup(coq.lsp_ensure_capabilities{})
+
+-- CSS
+local css_capabilities = vim.lsp.protocol.make_client_capabilities()
+css_capabilities.textDocument.completion.completionItem.snippetSupport = true
+lsp.cssls.setup{}
+lsp.cssls.setup(coq.lsp_ensure_capabilities{
+    capabilities = css_capabilities,
+    cmd = { "vscode-css-languageserver", "--stdio" }
+})
+
+-- Go
+lsp.gopls.setup{}
+lsp.gopls.setup(coq.lsp_ensure_capabilities{})
+
+-- HTML
+local html_capabilities = vim.lsp.protocol.make_client_capabilities()
+html_capabilities.textDocument.completion.completionItem.snippetSupport = true
+lsp.html.setup{}
+lsp.html.setup(coq.lsp_ensure_capabilities{
+    capabilities = html_capabilities,
+    cmd = { "vscode-html-languageserver", "--stdio" }
+})
+
+-- Json
+lsp.jsonls.setup{}
+lsp.jsonls.setup(coq.lsp_ensure_capabilities{})
+
+-- Latex
+lsp.texlab.setup{}
+lsp.texlab.setup(coq.lsp_ensure_capabilities{})
+
+-- Lua
+lsp.sumneko_lua.setup{}
+lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities{
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
+
+-- Python
+vim.g.virtualenv_directory = "."
+lsp.pylsp.setup{}
+lsp.pylsp.setup(coq.lsp_ensure_capabilities{})
+
+-- Rust
+lsp.rust_analyzer.setup{}
+lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities{})
+
+-- Vim
+lsp.vimls.setup{}
+lsp.vimls.setup(coq.lsp_ensure_capabilities{})
+
 
 vim.cmd('COQnow -s')
