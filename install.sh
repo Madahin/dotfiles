@@ -33,7 +33,10 @@ function check_existing_conf()
 
 function install_nvim()
 {
-    conf_path="${XDG_DATA_HOME:-$HOME/.config/nvim}/init.vim"
+    conf_path="${XDG_DATA_HOME:-$HOME/.config/nvim}/init.lua"
+    lua_LSP_path="${XDG_DATA_HOME:-$HOME/.config/nvim}/lua/LSP"
+    lua_packer_path="${XDG_DATA_HOME:-$HOME/.config/nvim}/lua/packer"
+
     version=$(nvim -v | head -n1 | cut -d ' ' -f 2 | cut -c2-)
     echo "nvim version: ${version}"
 
@@ -48,19 +51,34 @@ function install_nvim()
         return 1
     fi
 
-    echo checking for vim-plug
-    if [[ -f "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" ]]
+    mkdir -p ${lua_packer_path}
+    if ! check_existing_conf "${lua_packer_path}/plugins.lua" "neovim packer"
     then
-        echo vim-plug already exist
-    else
-        sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        return 1
     fi
 
-    # Necessary for starry to function properly
-    mkdir -p ~/.local/share/nvim/site/pack/packer/opt/starry.nvim
+    mkdir -p ${lua_LSP_path}
+    if ! check_existing_conf "${lua_LSP_path}/plugins.lua" "neovim LSP"
+    then
+        return 1
+    fi
 
-    ln -s "${PWD}/init.vim" "${conf_path}"
+
+
+
+    echo checking for packer.nvim
+    packer_path="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack/packer/start/packer.nvim"
+    if [[ -d "${packer_path}" ]]
+    then
+        echo packer.nvim already exist
+    else
+        mkdir -p ${packer_path}
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    fi
+ 
+    ln -s "${PWD}/init.lua" "${conf_path}"
+    ln -s "${PWD}/nvim_lua/plugin_lsp.lua" "${lua_LSP_path}/plugins.lua"
+    ln -s "${PWD}/nvim_lua/plugin_packer.lua" "${lua_packer_path}/plugins.lua"
 
     echo "Installation complete"
 
