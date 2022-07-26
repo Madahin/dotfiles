@@ -56,7 +56,8 @@ return require('packer').startup(function()
   }
 
   -- Completion
-  use { 'ms-jpq/coq_nvim', run = ':COQdeps | :COQsnips compile'}
+  use { 'ms-jpq/coq_nvim', run = ':COQdeps'}
+  use { 'ms-jpq/coq.artifacts', run = ':COQsnips compile' }
 
   -- COQsnips compile
 
