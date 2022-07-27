@@ -1,5 +1,61 @@
 #!/bin/bash
 
+function get_OS()
+{
+    if [ -f /etc/os-release ]; then
+        # freedesktop.org and systemd
+        . /etc/os-release
+        OS=$NAME
+        VER=$VERSION_ID
+    else
+        echo "Unsupported system"
+        exit 1
+    fi
+    echo ${OS}
+}
+
+function get_package_manager_install_command()
+{
+    # detect OS
+    OS=$(get_OS)
+
+    # Return package manager depending on OS
+    if [[ "${OS}" == "Ubuntu" ]]
+    then
+        echo "sudo apt install"
+    elif [[ "${OS}" == "Arch Linux" ]]
+    then
+        # Should try to detect multiple installer (pacmam, yay, the rust one, etc.)
+        echo "yay -S"
+    else
+        echo "Unsupported distribution"
+        exit 1
+    fi
+
+    return 0
+}
+
+function install_LSP()
+{
+    installer=$(get_package_manager_install_command)
+    OS=$(get_OS)
+
+    # List package depending on OS
+    if [[ "${OS}" == "Ubuntu" ]]
+    then
+        sudo npm i -g bash-language-server vscode-html-languageserver-bin vscode-css-languageserver-bin vim-language-server
+        sudo pip install python-lsp-black
+        ${installer} universal-ctags
+    elif [[ "${OS}" == "Arch Linux" ]]
+    then
+        # Should try to detect multiple installer (pacmam, yay, the rust one, etc.)
+        ${installer} bash-language-server vscode-html-languageserver vscode-css-languageserver vim-language-server lua-language-server texlab vscode-json-languageserver python-lsp-black cmake-language-server ctags rust-analyzer
+    else
+        echo "Unsupported distribution"
+        return 0
+    fi
+}
+
 # Functions
 function prog_exist()
 {
@@ -61,6 +117,8 @@ function install_nvim()
     if ! check_existing_conf "${lua_LSP_path}/plugins.lua" "neovim LSP"
     then
         return 1
+    else
+        install_LSP
     fi
 
 
