@@ -1,7 +1,7 @@
 ----------------
 --  Functions --
 ----------------
-function file_exists(name)
+function File_exists(name)
    local f=io.open(name,"r")
    if f~=nil then io.close(f) return true else return false end
 end
@@ -11,11 +11,11 @@ end
 ----------------
 
 -- Hack around nixos limitation
-if file_exists(os.getenv( "HOME" ) .. 'bin/venv/bin/python3') then
-    vim.g.python3_host_prog = vim.fn.resolve(os.getenv( "HOME" ) .. 'bin/venv/bin/python3')
+if File_exists(os.getenv( "HOME" ) .. '/bin/venv/bin/python3') then
+    vim.g.python3_host_prog = vim.fn.resolve(os.getenv( "HOME" ) .. '/bin/venv/bin/python3')
 end
-if file_exists(os.getenv( "HOME" ) .. 'bin/venv2/bin/python2') then
-    vim.g.python_host_prog = vim.fn.resolve(os.getenv( "HOME" ) .. 'bin/venv2/bin/python2')
+if File_exists(os.getenv( "HOME" ) .. '/bin/venv2/bin/python2') then
+    vim.g.python_host_prog = vim.fn.resolve(os.getenv( "HOME" ) .. '/bin/venv2/bin/python2')
 end
 
 
