@@ -55,6 +55,8 @@ return require('packer').startup(function()
     }
   }
 
+  use 'lervag/vimtex'
+
   -- Completion
   use { 'ms-jpq/coq_nvim', run = ':COQdeps'}
   use { 'ms-jpq/coq.artifacts', run = ':COQsnips compile' }
