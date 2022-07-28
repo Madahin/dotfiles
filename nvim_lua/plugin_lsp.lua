@@ -112,7 +112,7 @@ lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities{
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = {'vim', 'use'},
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
