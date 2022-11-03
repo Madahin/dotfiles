@@ -47,6 +47,9 @@ return require('packer').startup(function()
   -- GBA assembly syntax
   use 'vim-scripts/rgbasm.vim'
 
+  -- Z80 assembly syntax
+  use 'samsaga2/vim-z80'
+
   -- Tree
   use {
     'kyazdani42/nvim-tree.lua',
