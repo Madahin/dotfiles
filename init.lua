@@ -50,6 +50,7 @@ vim.cmd('set wrap breakindent')
 vim.cmd('set encoding=utf-8')
 vim.cmd('set number')
 vim.cmd('set title')
+vim.cmd('set nolist')
 
 ----------------
 --  Shortcut  --
