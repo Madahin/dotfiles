@@ -101,8 +101,8 @@ lsp.texlab.setup{}
 lsp.texlab.setup(coq.lsp_ensure_capabilities{})
 
 -- Lua
-lsp.sumneko_lua.setup{}
-lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities{
+lsp.lua_ls.setup{}
+lsp.lua_ls.setup(coq.lsp_ensure_capabilities{
   settings = {
     Lua = {
       runtime = {
