@@ -29,9 +29,6 @@ require('packer/plugins')
 -- Appearance --
 ----------------
 
-vim.g.starry_style = "mariana"
-vim.g.starry_style_fix = true
-vim.cmd('colorscheme mariana')
 vim.cmd('highlight Pmenu guibg=white guifg=black gui=bold')
 vim.cmd('highlight Comment gui=bold')
 vim.cmd('highlight Normal gui=none')

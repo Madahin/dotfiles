@@ -1,9 +1,61 @@
 return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  
+
   -- Theme
-  use 'ray-x/starry.nvim'
+  --  use 'ray-x/starry.nvim'
+   use {'ray-x/starry.nvim', config = function()
+   local starry_config = {
+  border = false, -- Split window borders
+  hide_eob = true, -- Hide end of buffer
+  italics = {
+    comments = false, -- Italic comments
+    strings = false, -- Italic strings
+    keywords = false, -- Italic keywords
+    functions = false, -- Italic functions
+    variables = false -- Italic variables
+  },
+
+  contrast = { -- Select which windows get the contrast background
+    enable = true, -- Enable contrast
+    terminal = true, -- Darker terminal
+    filetypes = {}, -- Which filetypes get darker? e.g. *.vim, *.cpp, etc.
+  },
+
+  text_contrast = {
+    lighter = false, -- Higher contrast text for lighter style
+    darker = false -- Higher contrast text for darker style
+  },
+
+  disable = {
+    background = false, -- true: transparent background
+    term_colors = false, -- Disable setting the terminal colors
+    eob_lines = false -- Make end-of-buffer lines invisible
+  },
+
+  style = {
+    name = 'moonlight', -- Theme style name (moonlight, earliestsummer, etc.)
+    -- " other themes: dracula, oceanic, dracula_blood, 'deep ocean', darker, palenight, monokai, mariana, emerald, middlenight_blue
+    disable = {},  -- a list of styles to disable, e.g. {'bold', 'underline'}
+    fix = true,
+    darker_contrast = false, -- More contrast for darker style
+    daylight_swith = false, -- Enable day and night style switching
+    deep_black = false, -- Enable a deeper black background
+  },
+
+  custom_colors = {
+    variable = '#f797d7',
+  },
+  custom_highlights = {
+    LineNr = { fg = '#777777' },
+    Idnetifier = { fg = '#ff4797' },
+  }
+}
+ require('starry').setup(starry_config)
+ vim.cmd('colorscheme mariana')
+   end
+  }
+
 
   -- Status bar
   use 'vim-airline/vim-airline'
@@ -61,6 +113,7 @@ return require('packer').startup(function()
   use 'lervag/vimtex'
 
   -- Completion
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use { 'ms-jpq/coq_nvim', run = ':COQdeps'}
   use { 'ms-jpq/coq.artifacts', run = ':COQsnips compile' }
 
