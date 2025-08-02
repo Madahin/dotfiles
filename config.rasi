@@ -4,7 +4,7 @@ configuration {
 	show-icons: true;
 	terminal: "kitty";
 	sidebar-mode: true;
-	dpi: 138;
+	dpi: 89;
 	threads: 4;
 	timeout {
 		action: "kb-cancel";
