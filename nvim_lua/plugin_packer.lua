@@ -78,7 +78,7 @@ return require('packer').startup(function()
   use 'tpope/vim-sensible'
 
   -- Allows to use <Tab> for insert completion
-  use 'ervandew/supertab'
+  use 'lifepillar/vim-mucomplete'
 
   -- Auto-close (x)html tags
   use 'alvan/vim-closetag'

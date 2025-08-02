@@ -111,6 +111,10 @@ vim.cmd('syntax enable')
 vim.g.vimtex_view_general_viewer = 'okular'
 vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
 
+-- mucomplete
+vim.g.mucomplete_enable_auto_at_startup = 1
+vim.g.mucomplete_completion_delay = 1
+
 ----------------
 --     LSP    --
 ----------------
