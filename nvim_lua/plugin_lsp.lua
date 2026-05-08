@@ -1,11 +1,10 @@
-local lsp = require'lspconfig'
+---@type vim.lsp.Config
 local coq = require "coq"
 
 function File_exists(name)
    local f=io.open(name,"r")
    if f~=nil then io.close(f) return true else return false end
 end
-
 
 -- Avoid showing extra messages when using completion
 vim.cmd('set shortmess+=c')
@@ -45,11 +44,11 @@ local opts = {
         }
     },
 }
-require('rust-tools').setup(opts)
+--require('rust-tools').setup(opts)
 
 -- Bash
-lsp.bashls.setup{}
-lsp.bashls.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('bashls', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('bashls')
 
 
 -- C/C++
@@ -63,46 +62,46 @@ else
     vim.g.clang_compilation_database = nil
 end
 
-lsp.clangd.setup{}
-lsp.clangd.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('clangd', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('clangd')
+
 
 -- CMake
-lsp.cmake.setup{}
-lsp.cmake.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('cmake', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('cmake')
 
 -- CSS
 local css_capabilities = vim.lsp.protocol.make_client_capabilities()
 css_capabilities.textDocument.completion.completionItem.snippetSupport = true
-lsp.cssls.setup{}
-lsp.cssls.setup(coq.lsp_ensure_capabilities{
+vim.lsp.config('cssls', coq.lsp_ensure_capabilities{
     capabilities = css_capabilities,
     cmd = { "vscode-css-languageserver", "--stdio" }
 })
+vim.lsp.enable('cssls')
 
 -- Go
-lsp.gopls.setup{}
-lsp.gopls.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('gopls', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('gopls')
 
 -- HTML
 local html_capabilities = vim.lsp.protocol.make_client_capabilities()
 html_capabilities.textDocument.completion.completionItem.snippetSupport = true
-lsp.html.setup{}
-lsp.html.setup(coq.lsp_ensure_capabilities{
+vim.lsp.config('html', coq.lsp_ensure_capabilities{
     capabilities = html_capabilities,
     cmd = { "vscode-html-languageserver", "--stdio" }
 })
+vim.lsp.enable('html')
 
 -- Json
-lsp.jsonls.setup{}
-lsp.jsonls.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('jsonls', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('jsonls')
 
 -- Latex
-lsp.texlab.setup{}
-lsp.texlab.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('texlab', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('texlab')
 
 -- Lua
-lsp.lua_ls.setup{}
-lsp.lua_ls.setup(coq.lsp_ensure_capabilities{
+vim.lsp.config('lua_ls', coq.lsp_ensure_capabilities{
   settings = {
     Lua = {
       runtime = {
@@ -124,19 +123,21 @@ lsp.lua_ls.setup(coq.lsp_ensure_capabilities{
     },
   },
 })
+vim.lsp.enable('lua_ls')
+
 
 -- Python
 vim.g.virtualenv_directory = "."
-lsp.pylsp.setup{}
-lsp.pylsp.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('pylsp', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('pylsp')
 
 -- Rust
-lsp.rust_analyzer.setup{}
-lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('rust_analyzer', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('rust_analyzer')
 
 -- Vim
-lsp.vimls.setup{}
-lsp.vimls.setup(coq.lsp_ensure_capabilities{})
+vim.lsp.config('vimls', coq.lsp_ensure_capabilities{})
+vim.lsp.enable('vimls')
 
 
 vim.cmd('COQnow -s')
